@@ -1,0 +1,9 @@
+<h1>New Chao??</h1>
+<%= form_with model:@data do |f| %>
+ <h4>Chao's name</h4>
+ <%= f.text_field:name %>
+ <h4>Type and Attribute</h4>
+ <%= f.text_field:body %>
+
+ <%= f.submit 'OK!' %>
+<% end %>

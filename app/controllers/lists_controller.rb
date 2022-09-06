@@ -1,4 +1,5 @@
 class ListsController < ApplicationController
+
   def new
   @data = List.new
   end
@@ -14,16 +15,17 @@ class ListsController < ApplicationController
   end
 
   def show
-    @list = List.find(params[:id])
+  @list = List.find(params[:id])
   end
 
   def edit
+  @list = List.find(params[:id])
   end
 
-  private
 
+  private
   def list_params
-    params.require(:List).permit(:name,:body)
+  params.require(:list).permit(:name,:body)
   end
 
 end

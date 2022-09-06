@@ -1,2 +1,8 @@
-<h1>Lists#index</h1>
-<p>Find me in app/views/lists/index.html.erb</p>
+<h1>Chao-Data List</h1>
+
+<% @lists.each do |list| %>
+
+<p>タイトル</p>
+<span><%= link_to list.name, chao_path{list.id} %></span>
+
+<% end %>

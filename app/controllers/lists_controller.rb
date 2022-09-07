@@ -19,13 +19,18 @@ class ListsController < ApplicationController
   end
 
   def edit
-  @list = List.find(params[:id])
+  @list
   end
 
+  def destroy
+    list = List.find(params[:id])
+    list.destroy
+    redirect_to '/lists'
+  end
 
   private
   def list_params
-  params.require(:list).permit(:name,:body)
+  params.require(:list).permit(:name,:body,:image)
   end
 
 end

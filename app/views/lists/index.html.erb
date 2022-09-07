@@ -2,7 +2,14 @@
 
 <% @lists.each do |list| %>
 
-<p>タイトル</p>
+<p>Name</p>
 <span><%= link_to list.name, chao_path(list.id) %></span>
+
+<p>Image</p>
+ <% if list.image.attached? %>
+ <%= image_tag list.image,size:"200*200" %>
+ <% else %>
+  <%= image_tag 'no_image',size:"200*200" %>
+ <% end %>
 
 <% end %>

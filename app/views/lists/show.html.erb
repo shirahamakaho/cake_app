@@ -1,4 +1,14 @@
 <h2>Chao's Name</h2>
 <p><%= @list.name %></p>
+
 <h2>Chao's Attribute & Type</h2>
 <p><%= @list.body %></p>
+
+<p>Image</p>
+ <% if @list.image.attached? %>
+ <%= image_tag list.image,size:"300*300" %>
+ <% else %>
+  <%= image_tag 'no_image',size:"300*300" %>
+ <% end %>
+
+<%= link_to "削除",destroy_chao_path(@list.id),method: :delete,"data-confirm" => "本当に消すチャオ？" %>

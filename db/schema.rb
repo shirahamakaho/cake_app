@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_07_012122) do
+ActiveRecord::Schema.define(version: 2022_11_02_110958) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -40,13 +40,48 @@ ActiveRecord::Schema.define(version: 2022_09_07_012122) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "chaoers", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "chao_id"
+    t.text "message"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["chao_id"], name: "index_chaoers_on_chao_id"
+    t.index ["user_id"], name: "index_chaoers_on_user_id"
+  end
+
+  create_table "chaos", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "lists", force: :cascade do |t|
-    t.string "body"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "name"
+    t.integer "user_id"
+    t.integer "chao_id"
+    t.index ["chao_id"], name: "index_lists_on_chao_id"
+    t.index ["user_id"], name: "index_lists_on_user_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "chaoers", "chaos"
+  add_foreign_key "chaoers", "users"
+  add_foreign_key "lists", "chaos"
+  add_foreign_key "lists", "users"
 end
